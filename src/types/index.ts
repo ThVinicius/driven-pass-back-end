@@ -1,5 +1,7 @@
-import { users } from '@prisma/client'
+import { users, sessions } from '@prisma/client'
 
 type IUsers = Omit<users, 'id'>
 
-export { IUsers }
+type ISessions = Omit<sessions, 'id'>
+
+export { IUsers, ISessions }

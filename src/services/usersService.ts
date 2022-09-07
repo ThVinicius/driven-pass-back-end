@@ -16,4 +16,22 @@ function cryptPassword(password: string) {
   return bcrypt.hashSync(password, saltRounds)
 }
 
-export default { create }
+async function hanleSignIn(user: IUsers) {
+  const dbUser = await usersRepository.getByEmail(user.email)
+
+  if (dbUser === null)
+    throw { code: 'Unauthorized', message: 'Email ou password incorreto' }
+
+  validatePassword(user.password, dbUser.password)
+
+  return dbUser
+}
+
+function validatePassword(password: string, dbPassword: string) {
+  const compare = bcrypt.compareSync(password, dbPassword)
+
+  if (!compare)
+    throw { code: 'Unauthorized', message: 'Email ou password incorreto' }
+}
+
+export default { create, hanleSignIn }

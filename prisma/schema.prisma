@@ -30,8 +30,8 @@ model users {
 model sessions {
   id     Int    @id @default(autoincrement())
   token  String
-  user   users  @relation(fields: [userId], references: [id])
   userId Int    @unique
+  user   users  @relation(fields: [userId], references: [id])
 }
 
 model segureNotes {

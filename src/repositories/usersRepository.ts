@@ -5,4 +5,8 @@ async function insert(data: IUsers) {
   await prisma.users.create({ data })
 }
 
-export default { insert }
+async function getByEmail(email: string) {
+  return await prisma.users.findUnique({ where: { email } })
+}
+
+export default { insert, getByEmail }

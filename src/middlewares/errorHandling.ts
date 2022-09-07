@@ -10,6 +10,9 @@ export const errorHandling: ErrorRequestHandler = (error, req, res, next) => {
 
       return res.status(409).send(toSend)
 
+    case 'Unauthorized':
+      return res.status(401).send(error.message)
+
     default:
       console.log(error)
       return res.status(500).send(error)
