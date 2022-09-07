@@ -17,4 +17,8 @@ async function upsert(data: ISessions) {
   await sessionsRepository.upsert(data)
 }
 
-export default { upsert, createSession }
+async function getSession(token: string) {
+  return await sessionsRepository.getByToken(token)
+}
+
+export default { upsert, createSession, getSession }

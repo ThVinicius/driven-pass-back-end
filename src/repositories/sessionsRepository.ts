@@ -11,4 +11,8 @@ async function upsert(data: ISessions) {
   })
 }
 
-export default { upsert }
+async function getByToken(token: string) {
+  return await prisma.sessions.findFirst({ where: { token } })
+}
+
+export default { upsert, getByToken }
