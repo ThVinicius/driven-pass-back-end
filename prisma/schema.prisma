@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,20 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum cardType {
-  credit
-  debit
-  credit_and_debit
-}
-
 model users {
   id          Int           @id @default(autoincrement())
   email       String        @unique
   password    String
-  session     sessions?
-  segureNotes segureNotes[]
   cards       cards[]
   credentials credentials[]
+  segureNotes segureNotes[]
+  session     sessions?
   wireless    wireless[]
 }
 
@@ -78,4 +69,10 @@ model wireless {
   networkName String
   password    String
   user        users  @relation(fields: [userId], references: [id])
+}
+
+enum cardType {
+  credit
+  debit
+  credit_and_debit
 }
