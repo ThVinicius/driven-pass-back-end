@@ -30,8 +30,8 @@ async function create(sessionId: number, data: ICredentials) {
   return { id, userId, label, url, username }
 }
 
-async function get(userId: number) {
-  const credentials = await credentialsRepository.get(userId)
+async function getByUserId(userId: number) {
+  const credentials = await credentialsRepository.getByUserId(userId)
 
   return descriptAll(credentials)
 }
@@ -43,4 +43,37 @@ function descriptAll(array: credentials[]) {
   })
 }
 
-export default { create, get }
+function decryptPassword(password: string) {
+  return cryptr.decrypt(password)
+}
+
+async function getById(id: number, userId: number) {
+  const credencial = await validateCredentialGetById(id)
+
+  const message = 'Você não tem permissão para acessar essa credencial'
+
+  validateItsHis(credencial.userId, userId, message)
+
+  credencial.password = decryptPassword(credencial.password)
+
+  return credencial
+}
+
+function validateItsHis(dbUserId: number, userId: number, message: string) {
+  if (dbUserId !== userId)
+    throw {
+      code: 'Unauthorized',
+      message
+    }
+}
+
+async function validateCredentialGetById(id: number) {
+  const credential = await credentialsRepository.getById(id)
+
+  if (credential === null)
+    throw { code: 'Not Found', message: 'Essa credencial não existe' }
+
+  return credential
+}
+
+export default { create, getByUserId, getById }

@@ -5,8 +5,12 @@ async function insert(data: ICredentials) {
   return await prisma.credentials.create({ data })
 }
 
-async function get(userId: number) {
+async function getByUserId(userId: number) {
   return await prisma.credentials.findMany({ where: { userId } })
 }
 
-export default { insert, get }
+async function getById(id: number) {
+  return await prisma.credentials.findFirst({ where: { id } })
+}
+
+export default { insert, getByUserId, getById }

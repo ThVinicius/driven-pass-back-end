@@ -10,12 +10,22 @@ async function create(req: Request, res: Response) {
   return res.status(201).send(credential)
 }
 
-async function get(_: Request, res: Response) {
+async function getByUserId(_: Request, res: Response) {
   const session: users = res.locals.session
 
-  const credentials = await credentialsService.get(session.id)
+  const credentials = await credentialsService.getByUserId(session.id)
 
   return res.status(200).send(credentials)
 }
 
-export default { create, get }
+async function getById(req: Request, res: Response) {
+  const id = Number(req.params.id)
+
+  const session: users = res.locals.session
+
+  const credencial = await credentialsService.getById(id, session.id)
+
+  return res.status(200).send(credencial)
+}
+
+export default { create, getByUserId, getById }
