@@ -25,4 +25,11 @@ route.get(
   credentialsController.getById
 )
 
+route.delete(
+  '/credentials/:id',
+  tokenValidate,
+  schemaValidator(paramsSchemas.id, isParams),
+  credentialsController.remove
+)
+
 export default route

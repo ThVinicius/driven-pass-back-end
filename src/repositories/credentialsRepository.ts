@@ -13,4 +13,8 @@ async function getById(id: number) {
   return await prisma.credentials.findFirst({ where: { id } })
 }
 
-export default { insert, getByUserId, getById }
+async function remove(id: number) {
+  return await prisma.credentials.delete({ where: { id } })
+}
+
+export default { insert, getByUserId, getById, remove }

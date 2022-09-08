@@ -28,4 +28,16 @@ async function getById(req: Request, res: Response) {
   return res.status(200).send(credencial)
 }
 
-export default { create, getByUserId, getById }
+async function remove(req: Request, res: Response) {
+  const id = Number(req.params.id)
+
+  const session: users = res.locals.session
+
+  await credentialsService.hanleRemove(id, session.id)
+
+  await credentialsService.removeCredential(id)
+
+  return res.sendStatus(200)
+}
+
+export default { create, getByUserId, getById, remove }

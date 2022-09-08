@@ -76,4 +76,16 @@ async function validateCredentialGetById(id: number) {
   return credential
 }
 
-export default { create, getByUserId, getById }
+async function hanleRemove(id: number, userId: number) {
+  const credencial = await validateCredentialGetById(id)
+
+  const message = 'Você não tem permissão para deletar essa credencial'
+
+  validateItsHis(credencial.userId, userId, message)
+}
+
+async function removeCredential(id: number) {
+  await credentialsRepository.remove(id)
+}
+
+export default { create, getByUserId, getById, hanleRemove, removeCredential }
