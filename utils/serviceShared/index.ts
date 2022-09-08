@@ -24,6 +24,13 @@ function descriptAllPassword(array: credentials[] | cards[]) {
   })
 }
 
+function descriptAllSecurityCode(array: cards[]) {
+  return array.map(item => {
+    item.securityCode = cryptr.decrypt(item.securityCode)
+    return item
+  })
+}
+
 function decryptPassword(password: string) {
   return cryptr.decrypt(password)
 }
@@ -53,5 +60,6 @@ export {
   descriptAllPassword,
   decryptPassword,
   validateItsHis,
-  validateGetById
+  validateGetById,
+  descriptAllSecurityCode
 }

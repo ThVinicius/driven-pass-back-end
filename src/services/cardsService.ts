@@ -5,9 +5,10 @@ import {
   descriptAllPassword,
   decryptPassword,
   validateItsHis,
-  validateGetById
+  validateGetById,
+  descriptAllSecurityCode
 } from '../../utils/serviceShared/index'
-import { credentials } from '@prisma/client'
+import { cards } from '@prisma/client'
 
 async function create(sessionId: number, data: ICards) {
   data.securityCode = encrypt(data.securityCode)
@@ -28,43 +29,43 @@ async function getByUserId(userId: number) {
 
   descriptAllPassword(cards)
 
+  descriptAllSecurityCode(cards)
+
   return cards
 }
 
 async function getById(id: number, userId: number) {
   const promise = cardsRepository.getById(id)
 
-  const messageError = 'Essa credencial não existe'
+  const messageError = 'Esse cartão não existe'
 
-  const credencial = <credentials>(
-    (<unknown>await validateGetById(promise, messageError))
-  )
+  const cards = <cards>(<unknown>await validateGetById(promise, messageError))
 
-  const message = 'Você não tem permissão para acessar essa credencial'
+  const message = 'Você não tem permissão para acessar esse cartão'
 
-  validateItsHis(credencial.userId, userId, message)
+  validateItsHis(cards.userId, userId, message)
 
-  credencial.password = decryptPassword(credencial.password)
+  cards.password = decryptPassword(cards.password)
 
-  return credencial
+  cards.securityCode = decryptPassword(cards.securityCode)
+
+  return cards
 }
 
 async function hanleRemove(id: number, userId: number) {
   const promise = cardsRepository.getById(id)
 
-  const messageError = 'Essa credencial não existe'
+  const messageError = 'Esse cartão não existe'
 
-  const credencial = <credentials>(
-    (<unknown>await validateGetById(promise, messageError))
-  )
+  const cards = <cards>(<unknown>await validateGetById(promise, messageError))
 
-  const message = 'Você não tem permissão para deletar essa credencial'
+  const message = 'Você não tem permissão para deletar esse cartão'
 
-  validateItsHis(credencial.userId, userId, message)
+  validateItsHis(cards.userId, userId, message)
 }
 
-async function removeCredential(id: number) {
+async function remove(id: number) {
   await cardsRepository.remove(id)
 }
 
-export default { create, getByUserId, getById, hanleRemove, removeCredential }
+export default { create, getByUserId, getById, hanleRemove, remove }

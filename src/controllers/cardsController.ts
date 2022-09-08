@@ -5,17 +5,17 @@ import { users } from '@prisma/client'
 async function create(req: Request, res: Response) {
   const session: users = res.locals.session
 
-  const credential = await cardsService.create(session.id, req.body)
+  const cards = await cardsService.create(session.id, req.body)
 
-  return res.status(201).send(credential)
+  return res.status(201).send(cards)
 }
 
 async function getByUserId(_: Request, res: Response) {
   const session: users = res.locals.session
 
-  const credentials = await cardsService.getByUserId(session.id)
+  const cards = await cardsService.getByUserId(session.id)
 
-  return res.status(200).send(credentials)
+  return res.status(200).send(cards)
 }
 
 async function getById(req: Request, res: Response) {
@@ -23,9 +23,9 @@ async function getById(req: Request, res: Response) {
 
   const session: users = res.locals.session
 
-  const credencial = await cardsService.getById(id, session.id)
+  const cards = await cardsService.getById(id, session.id)
 
-  return res.status(200).send(credencial)
+  return res.status(200).send(cards)
 }
 
 async function remove(req: Request, res: Response) {
@@ -35,7 +35,7 @@ async function remove(req: Request, res: Response) {
 
   await cardsService.hanleRemove(id, session.id)
 
-  await cardsService.removeCredential(id)
+  await cardsService.remove(id)
 
   return res.sendStatus(200)
 }

@@ -39,7 +39,7 @@ model cards {
   id             Int      @id @default(autoincrement())
   userId         Int
   label          String
-  number         String
+  number         String   @db.VarChar(19)
   cardholderName String
   securityCode   String
   expirationDate String   @db.VarChar(5)
