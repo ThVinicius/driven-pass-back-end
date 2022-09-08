@@ -1,5 +1,5 @@
-import credentialsRepository from '../repositories/credentialsRepository'
-import { ICredentials } from '../types/index'
+import cardsRepository from '../repositories/cardsRepository'
+import { ICards } from '../types/index'
 import {
   encrypt,
   descriptAllPassword,
@@ -9,26 +9,30 @@ import {
 } from '../../utils/serviceShared/index'
 import { credentials } from '@prisma/client'
 
-async function create(sessionId: number, data: ICredentials) {
+async function create(sessionId: number, data: ICards) {
+  data.securityCode = encrypt(data.securityCode)
+
   data.password = encrypt(data.password)
 
   data.userId = sessionId
 
-  const credential = await credentialsRepository.insert(data)
+  const credential = await cardsRepository.insert(data)
 
-  const { id, userId, label, url, username } = credential
+  const { id, userId, label, number, cardholderName, type } = credential
 
-  return { id, userId, label, url, username }
+  return { id, userId, label, number, cardholderName, type }
 }
 
 async function getByUserId(userId: number) {
-  const credentials = await credentialsRepository.getByUserId(userId)
+  const cards = await cardsRepository.getByUserId(userId)
 
-  return descriptAllPassword(credentials)
+  descriptAllPassword(cards)
+
+  return cards
 }
 
 async function getById(id: number, userId: number) {
-  const promise = credentialsRepository.getById(id)
+  const promise = cardsRepository.getById(id)
 
   const messageError = 'Essa credencial não existe'
 
@@ -46,7 +50,7 @@ async function getById(id: number, userId: number) {
 }
 
 async function hanleRemove(id: number, userId: number) {
-  const promise = credentialsRepository.getById(id)
+  const promise = cardsRepository.getById(id)
 
   const messageError = 'Essa credencial não existe'
 
@@ -60,7 +64,7 @@ async function hanleRemove(id: number, userId: number) {
 }
 
 async function removeCredential(id: number) {
-  await credentialsRepository.remove(id)
+  await cardsRepository.remove(id)
 }
 
 export default { create, getByUserId, getById, hanleRemove, removeCredential }

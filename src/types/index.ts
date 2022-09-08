@@ -1,4 +1,10 @@
-import { users, sessions, credentials, segureNotes } from '@prisma/client'
+import {
+  users,
+  sessions,
+  credentials,
+  segureNotes,
+  cards
+} from '@prisma/client'
 
 type IUsers = Omit<users, 'id'>
 
@@ -8,7 +14,9 @@ type ICredentials = Omit<credentials, 'id'>
 
 type ISegureNotes = Omit<segureNotes, 'id'>
 
-type G = segureNotes | credentials | null
+type ICards = Omit<cards, 'id'>
+
+type G = segureNotes | credentials | cards | null
 
 declare module 'jsonwebtoken' {
   export interface UserIDJwtPayload extends JwtPayload {
@@ -18,4 +26,4 @@ declare module 'jsonwebtoken' {
   }
 }
 
-export { IUsers, ISessions, ICredentials, ISegureNotes, G }
+export { IUsers, ISessions, ICredentials, ISegureNotes, G, ICards }

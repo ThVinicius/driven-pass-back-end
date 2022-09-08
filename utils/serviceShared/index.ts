@@ -1,6 +1,6 @@
 import Cryptr from 'cryptr'
 import dotenv from 'dotenv'
-import { credentials, segureNotes } from '@prisma/client'
+import { credentials, cards } from '@prisma/client'
 import { G } from '../../src/types/index'
 
 dotenv.config()
@@ -13,11 +13,11 @@ function cryptConfig() {
   return new Cryptr(secretKey)
 }
 
-function cryptrPassword(password: string) {
+function encrypt(password: string) {
   return cryptr.encrypt(password)
 }
 
-function descriptAll(array: credentials[]) {
+function descriptAllPassword(array: credentials[] | cards[]) {
   return array.map(item => {
     item.password = cryptr.decrypt(item.password)
     return item
@@ -49,8 +49,8 @@ async function validateGetById(get: Promise<G>, message: string) {
 }
 
 export {
-  cryptrPassword,
-  descriptAll,
+  encrypt,
+  descriptAllPassword,
   decryptPassword,
   validateItsHis,
   validateGetById
