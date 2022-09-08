@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/app.ts",
     "build": "prisma db push && tsc",
-    "start": "node ./dist/app.js",
+    "start": "node ./dist/src/app.js",
     "prisma": "prisma studio"
   },
   "keywords": [],
