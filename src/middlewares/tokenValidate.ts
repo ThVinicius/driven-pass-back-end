@@ -13,7 +13,8 @@ export default async function tokenValidate(
 ) {
   const { error } = tokenSchema.validate(req.headers)
 
-  if (error) return res.sendStatus(400)
+  if (error)
+    return res.status(400).send(error.details.map(detail => detail.message))
 
   const { authorization } = req.headers
 
@@ -21,55 +22,40 @@ export default async function tokenValidate(
 
   const secretKey: string = process.env.JWT_SECRET!
 
-  // try {
-  const data = <jwt.UserIDJwtPayload>(<unknown>jwt.verify(
-    token,
-    secretKey,
-    function (err) {
-      if (err) {
-        switch (err.name) {
-          case 'JsonWebTokenError':
-            return res.status(401).send('token inválido')
+  try {
+    const data = <jwt.UserIDJwtPayload>jwt.verify(token, secretKey)
 
-          case 'TokenExpiredError':
-            return res.status(498).send('token expirado')
+    await validateSession(token)
 
-          default:
-            console.log(error)
-            return res.status(500).send(error)
-        }
-      }
+    res.locals.session = data
+
+    next()
+  } catch (error: any) {
+    switch (error.name) {
+      case 'JsonWebTokenError':
+        return res.status(401).send('token inválido')
+
+      case 'TokenExpiredError':
+        return res.status(498).send('token expirado')
+
+      case 'Upgrade Required':
+        return res.status(426).send(error.message)
+
+      default:
+        console.log(error)
+        return res.status(500).send(error)
     }
-  ))
-
-  await validateSession(token)
-
-  res.locals.userId = data.id
-
-  next()
-  // } catch (error: any) {
-  //   switch (error.name) {
-  //     case 'JsonWebTokenError':
-  //       return res.status(401).send('token inválido')
-
-  //     case 'TokenExpiredError':
-  //       return res.status(498).send('token expirado')
-
-  //     default:
-  //       console.log(error)
-  //       return res.status(500).send(error)
-  //   }
-  // }
+  }
 }
 
 async function validateSession(token: string) {
   const session = await sessionsService.getSession(token)
 
-  const message = `Esse token é antigo! 
+  const message = `Esse token é antigo!
   Gere um token novo e utilize-o para acessar essa rota.
 
-  Porque desse erro? 
+  Porque esse erro ocorreu?
   A session foi planejada para armazenar o token mais recente, sempre que um login é efetuado é feito um upsert na tabela de sessions`
 
-  if (session === null) throw { code: 'Upgrade Required', message }
+  if (session === null) throw { name: 'Upgrade Required', message }
 }

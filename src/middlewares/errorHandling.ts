@@ -6,26 +6,15 @@ export const errorHandling: ErrorRequestHandler = (error, req, res, next) => {
 
   const uniqueError = errorMessage(message, error.meta.target)
 
-  console.log(error)
-
-  if (error.name === 'JsonWebTokenError')
-    return res.status(401).send('token inválido')
-
-  if (error.name === 'TokenExpiredError')
-    return res.status(498).send('token expirado')
-
   switch (error.code) {
-    case 'P2002':
-      return res.status(409).send(uniqueError)
+    case 'Bad request':
+      return res.status(400).send(error.message)
 
     case 'Unauthorized':
       return res.status(401).send(error.message)
 
-    case 'Upgrade Required':
-      return res.status(426).send(error.message)
-
-    case 'Token expired/invalid':
-      return res.status(426).send(error.message)
+    case 'P2002':
+      return res.status(409).send(uniqueError)
 
     default:
       console.log(error)
