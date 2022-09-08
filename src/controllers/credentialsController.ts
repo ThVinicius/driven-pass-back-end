@@ -5,9 +5,17 @@ import { users } from '@prisma/client'
 async function create(req: Request, res: Response) {
   const session: users = res.locals.session
 
-  await credentialsService.create(session.id, req.body)
+  const credential = await credentialsService.create(session.id, req.body)
 
-  return res.sendStatus(201)
+  return res.status(201).send(credential)
 }
 
-export default { create }
+async function get(_: Request, res: Response) {
+  const session: users = res.locals.session
+
+  const credentials = await credentialsService.get(session.id)
+
+  return res.status(200).send(credentials)
+}
+
+export default { create, get }

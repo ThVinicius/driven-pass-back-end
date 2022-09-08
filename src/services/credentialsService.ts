@@ -2,6 +2,7 @@ import Cryptr from 'cryptr'
 import dotenv from 'dotenv'
 import credentialsRepository from '../repositories/credentialsRepository'
 import { ICredentials } from '../types/index'
+import { credentials } from '@prisma/client'
 
 dotenv.config()
 
@@ -17,12 +18,29 @@ function cryptrPassword(password: string) {
   return cryptr.encrypt(password)
 }
 
-async function create(userId: number, data: ICredentials) {
+async function create(sessionId: number, data: ICredentials) {
   data.password = cryptrPassword(data.password)
 
-  data.userId = userId
+  data.userId = sessionId
 
-  await credentialsRepository.insert(data)
+  const credential = await credentialsRepository.insert(data)
+
+  const { id, userId, label, url, username } = credential
+
+  return { id, userId, label, url, username }
 }
 
-export default { create }
+async function get(userId: number) {
+  const credentials = await credentialsRepository.get(userId)
+
+  return descriptAll(credentials)
+}
+
+function descriptAll(array: credentials[]) {
+  return array.map(item => {
+    item.password = cryptr.decrypt(item.password)
+    return item
+  })
+}
+
+export default { create, get }

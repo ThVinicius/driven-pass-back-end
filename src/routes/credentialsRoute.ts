@@ -13,4 +13,6 @@ route.post(
   credentialsController.create
 )
 
+route.get('/credentials', tokenValidate, credentialsController.get)
+
 export default route

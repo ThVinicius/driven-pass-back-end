@@ -2,7 +2,11 @@ import prisma from '../database/db'
 import { ICredentials } from '../types/index'
 
 async function insert(data: ICredentials) {
-  await prisma.credentials.create({ data })
+  return await prisma.credentials.create({ data })
 }
 
-export default { insert }
+async function get(userId: number) {
+  return await prisma.credentials.findMany({ where: { userId } })
+}
+
+export default { insert, get }
