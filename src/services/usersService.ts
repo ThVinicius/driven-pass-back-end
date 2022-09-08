@@ -3,14 +3,14 @@ import bcrypt from 'bcrypt'
 import { IUsers } from '../types/index'
 
 async function create(data: IUsers) {
-  const password = cryptPassword(data.password)
+  const password = bcryptPassword(data.password)
 
   data.password = password
 
   await usersRepository.insert(data)
 }
 
-function cryptPassword(password: string) {
+function bcryptPassword(password: string) {
   const saltRounds: number = 10
 
   return bcrypt.hashSync(password, saltRounds)
