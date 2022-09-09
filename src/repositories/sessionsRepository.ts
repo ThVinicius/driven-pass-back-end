@@ -1,5 +1,5 @@
 import prisma from '../database/db'
-import { ISessions } from '../types/index'
+import { ISessions } from '../types/sessionsTypes'
 
 async function upsert(data: ISessions) {
   const { token, userId } = data

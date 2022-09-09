@@ -1,5 +1,5 @@
 import cardsRepository from '../repositories/cardsRepository'
-import { ICards } from '../types/index'
+import { ICards } from '../types/cardsTypes'
 import {
   encrypt,
   descriptAllPassword,

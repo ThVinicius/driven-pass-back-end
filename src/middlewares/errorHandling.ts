@@ -2,6 +2,22 @@ import { ErrorRequestHandler } from 'express'
 import errorMessage from '../../utils/errorMessage'
 
 export const errorHandling: ErrorRequestHandler = (error, req, res, next) => {
+  if (error.name !== undefined && error.name.length >= 16) {
+    switch (error.name) {
+      case 'JsonWebTokenError':
+        return res.status(401).send('token inválido')
+
+      case 'TokenExpiredError':
+        return res.status(498).send('token expirado')
+
+      case 'Upgrade Required':
+        return res.status(426).send('token expirado')
+
+      default:
+        return res.status(500).send(error)
+    }
+  }
+
   switch (error.code) {
     case 'Bad request':
       return res.status(400).send(error.message)

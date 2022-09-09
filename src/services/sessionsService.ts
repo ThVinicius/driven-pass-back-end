@@ -1,6 +1,6 @@
 import sessionsRepository from '../repositories/sessionsRepository'
 import jwt from 'jsonwebtoken'
-import { ISessions } from '../types/index'
+import { ISessions } from '../types/sessionsTypes'
 import { users } from '@prisma/client'
 
 function createSession(user: users) {

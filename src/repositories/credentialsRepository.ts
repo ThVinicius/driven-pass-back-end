@@ -1,5 +1,5 @@
 import prisma from '../database/db'
-import { ICredentials } from '../types/index'
+import { ICredentials } from '../types/credentialsTypes'
 
 async function insert(data: ICredentials) {
   return await prisma.credentials.create({ data })

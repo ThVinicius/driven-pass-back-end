@@ -1,5 +1,5 @@
 import prisma from '../database/db'
-import { IUsers } from '../types/index'
+import { IUsers } from '../types/usersTypes'
 
 async function insert(data: IUsers) {
   await prisma.users.create({ data })

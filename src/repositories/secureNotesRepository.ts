@@ -1,5 +1,5 @@
 import prisma from '../database/db'
-import { ISegureNotes } from '../types/index'
+import { ISegureNotes } from '../types/secureNotesTypes'
 
 async function insert(data: ISegureNotes) {
   return await prisma.segureNotes.create({ data })

@@ -1,5 +1,5 @@
 import secureNotesRepository from '../repositories/secureNotesRepository'
-import { ISegureNotes } from '../types/index'
+import { ISegureNotes } from '../types/secureNotesTypes'
 import {
   validateItsHis,
   validateGetById

@@ -1,6 +1,6 @@
 import Cryptr from 'cryptr'
 import dotenv from 'dotenv'
-import { credentials, cards } from '@prisma/client'
+import { credentials, cards, wireless } from '@prisma/client'
 import { G } from '../../src/types/index'
 
 dotenv.config()
@@ -17,7 +17,7 @@ function encrypt(password: string) {
   return cryptr.encrypt(password)
 }
 
-function descriptAllPassword(array: credentials[] | cards[]) {
+function descriptAllPassword(array: credentials[] | cards[] | wireless[]) {
   return array.map(item => {
     item.password = cryptr.decrypt(item.password)
     return item

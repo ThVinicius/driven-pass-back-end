@@ -1,5 +1,5 @@
 import credentialsRepository from '../repositories/credentialsRepository'
-import { ICredentials } from '../types/index'
+import { ICredentials } from '../types/credentialsTypes'
 import {
   encrypt,
   descriptAllPassword,

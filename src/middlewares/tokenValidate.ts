@@ -22,30 +22,13 @@ export default async function tokenValidate(
 
   const secretKey: string = process.env.JWT_SECRET!
 
-  try {
-    const data = <jwt.UserIDJwtPayload>jwt.verify(token, secretKey)
+  const data = <jwt.UserIDJwtPayload>jwt.verify(token, secretKey)
 
-    await validateSession(token)
+  await validateSession(token)
 
-    res.locals.session = data
+  res.locals.session = data
 
-    next()
-  } catch (error: any) {
-    switch (error.name) {
-      case 'JsonWebTokenError':
-        return res.status(401).send('token inválido')
-
-      case 'TokenExpiredError':
-        return res.status(498).send('token expirado')
-
-      case 'Upgrade Required':
-        return res.status(426).send(error.message)
-
-      default:
-        console.log(error)
-        return res.status(500).send(error)
-    }
-  }
+  next()
 }
 
 async function validateSession(token: string) {

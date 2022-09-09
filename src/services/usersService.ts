@@ -1,6 +1,6 @@
 import usersRepository from '../repositories/usersRepository'
 import bcrypt from 'bcrypt'
-import { IUsers } from '../types/index'
+import { IUsers } from '../types/usersTypes'
 
 async function create(data: IUsers) {
   const password = bcryptPassword(data.password)

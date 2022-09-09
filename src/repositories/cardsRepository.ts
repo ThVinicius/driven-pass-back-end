@@ -1,5 +1,5 @@
 import prisma from '../database/db'
-import { ICards } from '../types/index'
+import { ICards } from '../types/cardsTypes'
 
 async function insert(data: ICards) {
   return await prisma.cards.create({ data })
