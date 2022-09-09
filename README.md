@@ -112,7 +112,7 @@ POST /credentials
 | :--------- | :------- | :--------------------- |
 | `label`    | `string` | **required**, **trim** |
 | `url`      | `string` | **required**, **uri**  |
-| `username` | `string` | **required**, **uri**  |
+| `username` | `string` | **required**, **trim** |
 | `password` | `string` | **required**           |
 
 <h4>Headers:</h4>
@@ -299,10 +299,10 @@ POST /secureNotes
 <h3>Request:</h3>
 <h4>Body:</h4>
 
-| Params       | Type     | Description                                   |
-| :----------- | :------- | :-------------------------------------------- |
-| `title`      | `string` | **required**, **trim**,**maximum size: 50**   |
-| `annotation` | `string` | **required**, **trim**,**maximum size: 1000** |
+| Params       | Type     | Description                                    |
+| :----------- | :------- | :--------------------------------------------- |
+| `title`      | `string` | **required**, **trim**, **maximum size: 50**   |
+| `annotation` | `string` | **required**, **trim**, **maximum size: 1000** |
 
 <h4>Headers:</h4>
 Send the token (Bearer token)
