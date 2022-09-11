@@ -520,9 +520,9 @@ Send the token (Bearer token)
   "label": "cartão inter",
   "number": "1234 1234 1234 1234",
   "cardholderName": "FULANO P S",
-  "securityCode": "123",
+  "securityCode": "123", // the security code is encrypted in the database
   "expirationDate": "12/27",
-  "password": "1234",
+  "password": "1234", // the password is encrypted in the database
   "isVirtual": false,
   "type": "debit"
 }
@@ -723,7 +723,7 @@ Send the token (Bearer token)
   "userId": 1,
   "label": "wifi do vizinho",
   "networkName": "Não roube meu wifi",
-  "password": "senhaQueNenhumVizinhoConsegueDescobrir"
+  "password": "senhaQueNenhumVizinhoConsegueDescobrir" // the password is encrypted in the database
 }
 ```
 
