@@ -11,6 +11,8 @@ import {
 import { cards } from '@prisma/client'
 
 async function create(sessionId: number, data: ICards) {
+  const { password, securityCode } = data
+
   data.securityCode = encrypt(data.securityCode)
 
   data.password = encrypt(data.password)
@@ -19,9 +21,11 @@ async function create(sessionId: number, data: ICards) {
 
   const credential = await cardsRepository.insert(data)
 
-  const { id, userId, label, number, cardholderName, type } = credential
+  credential.password = password
 
-  return { id, userId, label, number, cardholderName, type }
+  credential.securityCode = securityCode
+
+  return credential
 }
 
 async function getByUserId(userId: number) {

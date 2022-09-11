@@ -10,15 +10,17 @@ import {
 import { wireless } from '@prisma/client'
 
 async function create(sessionId: number, data: IWireless) {
+  const { password } = data
+
   data.password = encrypt(data.password)
 
   data.userId = sessionId
 
   const wifi = await wirelessRepository.insert(data)
 
-  const { id, userId, label, networkName } = wifi
+  wifi.password = password
 
-  return { id, userId, label, networkName }
+  return wifi
 }
 
 async function getByUserId(userId: number) {

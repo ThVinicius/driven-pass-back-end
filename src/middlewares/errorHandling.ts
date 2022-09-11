@@ -11,7 +11,7 @@ export const errorHandling: ErrorRequestHandler = (error, req, res, next) => {
         return res.status(498).send('token expirado')
 
       case 'Upgrade Required':
-        return res.status(426).send('token expirado')
+        return res.status(426).send(error.message)
 
       default:
         return res.status(500).send(error)

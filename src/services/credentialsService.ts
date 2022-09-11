@@ -10,15 +10,17 @@ import {
 import { credentials } from '@prisma/client'
 
 async function create(sessionId: number, data: ICredentials) {
+  const { password } = data
+
   data.password = encrypt(data.password)
 
   data.userId = sessionId
 
   const credential = await credentialsRepository.insert(data)
 
-  const { id, userId, label, url, username } = credential
+  credential.password = password
 
-  return { id, userId, label, url, username }
+  return credential
 }
 
 async function getByUserId(userId: number) {

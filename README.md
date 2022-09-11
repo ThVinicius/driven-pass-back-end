@@ -143,7 +143,8 @@ Send the token (Bearer token)
   userId: 1, // user id
   label: "senha do gmail",
   url: "https://gmail.com",
-  username: "test@gmail.com"
+  username: "test@gmail.com",
+  senha: "123" // the password is encrypted in the database
 }
 
 ```
@@ -327,10 +328,11 @@ Send the token (Bearer token)
 
 ```json
 {
-  "id": 1,
+  "id": 5,
   "userId": 1,
-  "title": "senha do gmail",
-  "annotation": "123"
+  "label": "não esquecer!",
+  "title": "levar o cachorro para passear",
+  "annotation": "acordar cedo para fazer a tarefa"
 }
 ```
 
@@ -513,11 +515,15 @@ Send the token (Bearer token)
 
 ```json
 {
-  "id": 1,
+  "id": 6,
   "userId": 1,
   "label": "cartão inter",
   "number": "1234 1234 1234 1234",
   "cardholderName": "FULANO P S",
+  "securityCode": "123",
+  "expirationDate": "12/27",
+  "password": "1234",
+  "isVirtual": false,
   "type": "debit"
 }
 ```
@@ -716,7 +722,8 @@ Send the token (Bearer token)
   "id": 3,
   "userId": 1,
   "label": "wifi do vizinho",
-  "networkName": "Não roube meu wifi"
+  "networkName": "Não roube meu wifi",
+  "password": "senhaQueNenhumVizinhoConsegueDescobrir"
 }
 ```
 
