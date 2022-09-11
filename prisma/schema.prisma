@@ -28,11 +28,12 @@ model sessions {
 model segureNotes {
   id         Int    @id @default(autoincrement())
   userId     Int
+  label      String
   title      String @db.VarChar(50)
   annotation String @db.VarChar(1000)
   user       users  @relation(fields: [userId], references: [id])
 
-  @@unique([userId, title])
+  @@unique([userId, label])
 }
 
 model cards {

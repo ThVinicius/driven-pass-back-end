@@ -1,9 +1,8 @@
 import { Request, Response } from 'express'
 import wirelessService from '../services/wirelessService'
-import { users } from '@prisma/client'
 
 async function create(req: Request, res: Response) {
-  const session: users = res.locals.session
+  const session: { id: number } = res.locals.session
 
   const wifi = await wirelessService.create(session.id, req.body)
 
@@ -11,7 +10,7 @@ async function create(req: Request, res: Response) {
 }
 
 async function getByUserId(_: Request, res: Response) {
-  const session: users = res.locals.session
+  const session: { id: number } = res.locals.session
 
   const wireless = await wirelessService.getByUserId(session.id)
 
@@ -21,7 +20,7 @@ async function getByUserId(_: Request, res: Response) {
 async function getById(req: Request, res: Response) {
   const id = Number(req.params.id)
 
-  const session: users = res.locals.session
+  const session: { id: number } = res.locals.session
 
   const wifi = await wirelessService.getById(id, session.id)
 
@@ -31,7 +30,7 @@ async function getById(req: Request, res: Response) {
 async function remove(req: Request, res: Response) {
   const id = Number(req.params.id)
 
-  const session: users = res.locals.session
+  const session: { id: number } = res.locals.session
 
   await wirelessService.hanleRemove(id, session.id)
 

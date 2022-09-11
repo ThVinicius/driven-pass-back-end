@@ -4,11 +4,13 @@ import { ISessions } from '../types/sessionsTypes'
 import { users } from '@prisma/client'
 
 function createSession(user: users) {
+  const { id } = user
+
   const secretKey: string = process.env.JWT_SECRET!
 
   const config = { expiresIn: 60 * 60 * 24 * 30 }
 
-  const token = jwt.sign(user, secretKey, config)
+  const token = jwt.sign({ id }, secretKey, config)
 
   return { userId: user.id, token }
 }
