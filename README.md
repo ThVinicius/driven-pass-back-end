@@ -144,7 +144,8 @@ Send the token (Bearer token)
   label: "senha do gmail",
   url: "https://gmail.com",
   username: "test@gmail.com",
-  senha: "123" // the password is encrypted in the database
+  password: "123", // the password is encrypted in the database
+  createdAt:
 }
 
 ```
