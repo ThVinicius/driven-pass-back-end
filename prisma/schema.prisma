@@ -11,27 +11,30 @@ model users {
   id          Int           @id @default(autoincrement())
   email       String        @unique
   password    String
+  createdAt   DateTime      @default(now()) @db.Timestamptz(3)
   cards       cards[]
   credentials credentials[]
-  segureNotes segureNotes[]
+  secureNotes secureNotes[]
   session     sessions?
   wireless    wireless[]
 }
 
 model sessions {
-  id     Int    @id @default(autoincrement())
-  token  String
-  userId Int    @unique
-  user   users  @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  token     String
+  userId    Int      @unique
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  user      users    @relation(fields: [userId], references: [id])
 }
 
-model segureNotes {
-  id         Int    @id @default(autoincrement())
+model secureNotes {
+  id         Int      @id @default(autoincrement())
   userId     Int
   label      String
-  title      String @db.VarChar(50)
-  annotation String @db.VarChar(1000)
-  user       users  @relation(fields: [userId], references: [id])
+  title      String   @db.VarChar(50)
+  annotation String   @db.VarChar(1000)
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  user       users    @relation(fields: [userId], references: [id])
 
   @@unique([userId, label])
 }
@@ -47,30 +50,33 @@ model cards {
   password       String
   isVirtual      Boolean
   type           cardType
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
   user           users    @relation(fields: [userId], references: [id])
 
   @@unique([userId, label])
 }
 
 model credentials {
-  id       Int    @id @default(autoincrement())
-  userId   Int
-  label    String
-  url      String
-  username String
-  password String
-  user     users  @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  label     String
+  url       String
+  username  String
+  password  String
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  user      users    @relation(fields: [userId], references: [id])
 
   @@unique([userId, label])
 }
 
 model wireless {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   userId      Int
   label       String
   networkName String
   password    String
-  user        users  @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  user        users    @relation(fields: [userId], references: [id])
 }
 
 enum cardType {
