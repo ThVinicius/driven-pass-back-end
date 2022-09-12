@@ -1,3 +1,3 @@
-import { segureNotes } from '@prisma/client'
+import { secureNotes } from '@prisma/client'
 
-export type ISegureNotes = Omit<segureNotes, 'id'>
+export type ISecureNotes = Omit<secureNotes, 'id' | 'createdAt'>

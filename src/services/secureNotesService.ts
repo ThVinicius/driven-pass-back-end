@@ -1,11 +1,11 @@
 import secureNotesRepository from '../repositories/secureNotesRepository'
-import { ISegureNotes } from '../types/secureNotesTypes'
+import { ISecureNotes } from '../types/secureNotesTypes'
 import {
   validateItsHis,
   validateGetById
 } from '../../utils/serviceShared/index'
 
-async function create(sessionId: number, data: ISegureNotes) {
+async function create(sessionId: number, data: ISecureNotes) {
   data.userId = sessionId
 
   return await secureNotesRepository.insert(data)
