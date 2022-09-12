@@ -145,7 +145,7 @@ Send the token (Bearer token)
   url: "https://gmail.com",
   username: "test@gmail.com",
   password: "123", // the password is encrypted in the database
-  createdAt:
+  createdAt: "2022-09-12T18:02:32.945Z"
 }
 
 ```
@@ -188,7 +188,8 @@ Send the token (Bearer token)
     "label": "senha do gmail",
     "url": "https://gmail.com",
     "username": "test@gmail.com",
-    "password": "123"
+    "password": "123",
+    "createdAt": "2022-09-12T18:02:32.945Z"
   },
   {
     "id": 2,
@@ -196,7 +197,8 @@ Send the token (Bearer token)
     "label": "senha do hotmail",
     "url": "https://hotmail.com",
     "username": "test@hotmail.com",
-    "password": "123"
+    "password": "123",
+    "createdAt": "2022-09-12T18:02:32.945Z"
   }
 ]
 ```
@@ -246,7 +248,8 @@ Send the token (Bearer token)
   "label": "senha do gmail",
   "url": "https://gmail.com",
   "username": "test@gmail.com",
-  "password": "123"
+  "password": "123",
+  "createdAt": "2022-09-12T18:02:32.945Z"
 }
 ```
 
@@ -333,7 +336,8 @@ Send the token (Bearer token)
   "userId": 1,
   "label": "não esquecer!",
   "title": "levar o cachorro para passear",
-  "annotation": "acordar cedo para fazer a tarefa"
+  "annotation": "acordar cedo para fazer a tarefa",
+  "createdAt": "2022-09-12T18:02:32.945Z"
 }
 ```
 
@@ -373,13 +377,15 @@ Send the token (Bearer token)
     "id": 1,
     "userId": 1,
     "title": "senha do gmail",
-    "annotation": "123"
+    "annotation": "123",
+    "createdAt": "2022-09-12T18:02:32.945Z"
   },
   {
     "id": 2,
     "userId": 1,
     "title": "senha do hotmail",
-    "annotation": "1234"
+    "annotation": "1234",
+    "createdAt": "2022-09-12T18:02:32.945Z"
   }
 ]
 ```
@@ -427,7 +433,8 @@ Send the token (Bearer token)
   "id": 1,
   "userId": 1,
   "title": "senha do gmail",
-  "annotation": "123"
+  "annotation": "123",
+  "createdAt": "2022-09-12T18:02:32.945Z"
 }
 ```
 
@@ -525,7 +532,8 @@ Send the token (Bearer token)
   "expirationDate": "12/27",
   "password": "1234", // the password is encrypted in the database
   "isVirtual": false,
-  "type": "debit"
+  "type": "debit",
+  "createdAt": "2022-09-12T18:02:32.945Z"
 }
 ```
 
@@ -571,7 +579,8 @@ Send the token (Bearer token)
     "expirationDate": "12/27",
     "password": "1234",
     "isVirtual": false,
-    "type": "debit"
+    "type": "debit",
+    "createdAt": "2022-09-12T18:02:32.945Z"
   },
   {
     "id": 3,
@@ -583,7 +592,8 @@ Send the token (Bearer token)
     "expirationDate": "12/27",
     "password": "1234",
     "isVirtual": false,
-    "type": "credit"
+    "type": "credit",
+    "createdAt": "2022-09-12T18:02:32.945Z"
   }
 ]
 ```
@@ -637,7 +647,8 @@ Send the token (Bearer token)
   "expirationDate": "12/27",
   "password": "1234",
   "isVirtual": false,
-  "type": "debit"
+  "type": "debit",
+  "createdAt": "2022-09-12T18:02:32.945Z"
 }
 ```
 
@@ -724,7 +735,8 @@ Send the token (Bearer token)
   "userId": 1,
   "label": "wifi do vizinho",
   "networkName": "Não roube meu wifi",
-  "password": "senhaQueNenhumVizinhoConsegueDescobrir" // the password is encrypted in the database
+  "password": "senhaQueNenhumVizinhoConsegueDescobrir", // the password is encrypted in the database
+  "createdAt": "2022-09-12T18:02:32.945Z"
 }
 ```
 
@@ -765,14 +777,16 @@ Send the token (Bearer token)
     "userId": 1,
     "label": "wifi do vizinho",
     "networkName": "Não roube meu wifi",
-    "password": "1234"
+    "password": "1234",
+    "createdAt": "2022-09-12T18:02:32.945Z"
   },
   {
     "id": 2,
     "userId": 1,
     "label": "wifi do vizinho",
     "networkName": "Não roube meu wifi",
-    "password": "1234"
+    "password": "1234",
+    "createdAt": "2022-09-12T18:02:32.945Z"
   }
 ]
 ```
@@ -821,7 +835,8 @@ Send the token (Bearer token)
   "userId": 1,
   "label": "wifi do vizinho",
   "networkName": "Não roube meu wifi",
-  "password": "1234"
+  "password": "1234",
+  "createdAt": "2022-09-12T18:02:32.945Z"
 }
 ```
 
