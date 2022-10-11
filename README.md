@@ -899,13 +899,13 @@ To run this project, you will need to add the following environment variables to
 Clone the project
 
 ```bash
-  git clone https://github.com/andrezopo/projeto18-valex
+  git clone https://github.com/ThVinicius/drivenPass_backEnd.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd projeto18-valex/
+  cd drivenPass_backEnd
 ```
 
 Install dependencies
@@ -917,7 +917,7 @@ Install dependencies
 Create database
 
 ```bash
-  npx prisma db push
+  npx prisma migrate dev
 ```
 
 Start the server
