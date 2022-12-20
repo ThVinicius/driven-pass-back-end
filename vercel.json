@@ -1,5 +1,8 @@
 {
-  "builds": [
+  "name":"driven-pass-back-end",
+  "version":2,
+  "public":true,
+  "build": [
       {
           "src": "./dist/src/app.js",
           "use": "@vercel/node"
