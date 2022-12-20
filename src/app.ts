@@ -15,6 +15,6 @@ app.use(json())
 app.use(routes)
 app.use(errorHandling)
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8080
 
 app.listen(PORT, () => console.log(`server is up on port ${PORT}`))
